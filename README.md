@@ -1,3 +1,3 @@
-# SEO for React Talk
+# SEO & React Talk
 
-Slides for SEO for React to Orbis Ventures.
+Slides for "SEO & React" talk for Orbis Ventures.
