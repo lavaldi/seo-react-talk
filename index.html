@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>GraphQL</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/gaslight.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+	<style>
+		.b-left {
+			text-align: left;
+			float: left;
+			width: 60%;
+		}
+
+		.b-right {
+			float: right;
+			text-align: right;
+			width: 40%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>SEO for React</h1>
+				<img class="plain" src="img/seo-react.png" width="450" height="400">
+				<p>
+					<small>por
+						<a href="http://lavaldi.com">Claudia Valdivieso</a>
+					</small>
+				</p>
+			</section>
+			<section>
+				<section data-markdown>
+					<script type="text/template">
+						## ¿Qué es SEO?
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						Search Engine Optimization (SEO) es un proceso de **estructuración y organización** de tu sitio web para brindar una mejor
+						calidad y cantidad de tráfico al **posicionarse mejor** en los resultados de un motor de búsqueda, centrándose en las
+						palabras clave específicas relacionadas con tu negocio. El objetivo principal de realizar el proceso de SEO es obtener
+						más visibilidad en Internet y **atraer más tráfico** a tu sitio web.
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						Los motores de búsqueda rastrean el contenido que se coloca en los sitios web. Este es un proceso automático, y es extremadamente importante que el contenido esté estructurado y formateado de manera que sea **comprensible para los bots**. Esto implica optimizar el rendimiento del sitio web y también curar el contenido para proporcionar pistas a los rastreadores para comprender fácilmente tu sitio web.
+
+						Note:
+						Esto puede sonar bastante sencillo, pero para los sitios web creados en React, este no siempre es el caso. 
+					</script>
+				</section>
+			</section>
+			<section>
+				<section data-markdown>
+					<script type="text/template">
+						## Principales problemas de SEO con SPA
+
+						Note:
+						Aunque las SPA mejoran el rendimiento del sitio web en gran medida, existen ciertos problemas inherentes a este tipo de configuración cuando se trata de SEO.
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### 1. La falta de etiquetas SEO dinámicas
+						
+						Un SPA carga los datos dinámicamente en diferentes segmentos de la página web. Por lo tanto, cuando un rastreador intenta hacer clic en un enlace en particular, **no puede detectar el ciclo completo de carga de la página**. Los metadatos de la página que está en su lugar para el motor de búsqueda no se actualizan. Como resultado, tu SPA no puede ser vista por el rastreador del motor de búsqueda y será indexada como una página vacía.
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### 2. Los motores de búsqueda pueden o no ejecutar su JavaScript
+						
+						Cada SPA se basa en JavaScript para la carga dinámica del contenido en diferentes módulos de una página web. Un rastreador o motor de búsqueda **puede evitar la ejecución de JavaScript**. Obtiene directamente el contenido que está disponible sin permitir que JavaScript ejecute e indexe su sitio web en función de este contenido.
+
+						Note:
+						Google anunció en octubre de 2015 que rastrearían el JS y el CSS en los sitios web. Pero hay otros rastreadores como Yahoo, Bing y Baidu que ven estos sitios sin JavaScript como páginas en blanco. Para resolver esto, se necesita crear una solución para renderizar el contenido del lado del servidor para dar a los rastreadores algo para leer.
+					</script>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Soluciones</h2>
+					<aside class="notes">
+						Hay tres formas de resolver estos problemas, una si solo nos importa Google, y dos principales que resuelven para cualquier
+						motor de búsqueda.
+					</aside>
+				</section>
+				<section>
+					<h3>Fetch as Google</h3>
+					<aside class="notes">
+						Como dije anteriormente, desde el 2015 Google rastea SPA.
+					</aside>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						*Fetch as Google* es una herramienta para verificar si el bot de Google renderiza tus componentes de React, que está incluida en la [Search Console de Google](https://www.google.com/webmasters/tools/)
+						
+						Lo único que tenemos que hacer es realizar nuestra SPA como normalmente lo hacemos (del lado del cliente) y el bot de Google leerá el contenido aunque sea cargado asíncronamente (*cuya carga sea rápida*).
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						#### Contras
+
+						- No he encontrado información que diga que Google rastrea aún los enlaces que están dentro de estos componentes dinámicos (Ej. paginado).
+						- No se sabe si se puede crear metadata asíncronamente y que el bot de Google la entienda.
+						- Se tiene que renderizar el componente antes de hacer una llamada asíncrona.
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Prerendering
+						
+						[Prerender.io](https://prerender.io/), [Brombone](http://www.brombone.com/), [SEO.js](http://getseojs.com/), [SEO4Ajax](http://www.seo4ajax.com/), [Prerender.cloud](https://prerender.cloud/)
+
+						Note:
+						- Otro enfoque es usar servicios de cacheo.
+						- Prerender usa Headless Chrome para cargar la página y esperará a que la página termine de cargarse y luego devolverá el contenido en HTML completo.
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						#### Ventajas
+
+						- Permite que los motores de búsqueda **rastreen correctamente** un sitio web.
+						- **Es más fácil de configurar** (*que SSR*) porque no necesitamos que la base de código sea compatible con la representación del lado del servidor.
+						- Tiene **menos presión sobre el servidor** (*que SSR*), ya que es solo un simple motor de renderizado.
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						#### Contras
+
+						- Son servicios de paga.
+					</script>
+				</section>
+				<section>
+					<h3>React Isomorphic/Universal</h3>
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			center: true,
+			controls: true,
+			history: true,
+			slideNumber: false,
+			transition: 'fade',
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
+</html>
