@@ -81,14 +81,14 @@
 					<script type="text/template">
 						### 1. La falta de etiquetas SEO dinámicas
 						
-						Un SPA carga los datos dinámicamente en diferentes segmentos de la página web. Por lo tanto, cuando un rastreador intenta hacer clic en un enlace en particular, **no puede detectar el ciclo completo de carga de la página**. Los metadatos de la página que está en su lugar para el motor de búsqueda no se actualizan. Como resultado, tu SPA no puede ser vista por el rastreador del motor de búsqueda y será indexada como una página vacía.
+						Un SPA carga los datos dinámicamente en diferentes segmentos de la página web. Por lo tanto, cuando un rastreador intenta hacer clic en un enlace en particular, **no puede detectar el ciclo completo de carga de la página**. Los metadatos no se actualizan para el motor de búsqueda. Como resultado, el SPA no puede ser visto por el rastreador del motor de búsqueda y esa página será indexada como una página vacía.
 					</script>
 				</section>
 				<section data-markdown>
 					<script type="text/template">
 						### 2. Los motores de búsqueda pueden o no ejecutar JavaScript
 						
-						Cada SPA se basa en JavaScript para la carga dinámica del contenido en diferentes módulos de una página web. Un rastreador o motor de búsqueda **puede evitar la ejecución de JavaScript**. Obtiene directamente el contenido que está disponible sin permitir que JavaScript ejecute e indexe su sitio web en función de este contenido.
+						Un rastreador o motor de búsqueda **puede evitar la ejecución de JavaScript**. Obtiene directamente el contenido que está disponible sin permitir que JavaScript ejecute e indexe su sitio web en función de este contenido.
 
 						Note:
 						Google anunció en octubre de 2015 que rastrearían el JS y el CSS en los sitios web. Pero hay otros rastreadores como Yahoo, Bing y Baidu que ven estos sitios sin JavaScript como páginas en blanco. Para resolver esto, se necesita crear una solución para renderizar el contenido del lado del servidor para dar a los rastreadores algo para leer.
@@ -113,16 +113,16 @@
 					<script type="text/template">
 						*Fetch as Google* es una herramienta para verificar si el bot de Google renderiza tus componentes de React, que está incluida en la [Search Console de Google](https://www.google.com/webmasters/tools/)
 						
-						Lo único que tenemos que hacer es realizar nuestra SPA como normalmente lo hacemos (del lado del cliente) y el bot de Google leerá el contenido aunque sea cargado asíncronamente (*cuya carga sea rápida*).
+						Lo único que tenemos que hacer es realizar nuestra SPA como normalmente lo hacemos (del lado del cliente) y el bot de Google leerá el contenido aunque sea cargado asíncronamente.
 					</script>
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						#### Contras
+						#### Contras 👎
 
-						- No he encontrado información que diga que Google rastrea aún los enlaces que están dentro de estos componentes dinámicos (Ej. paginado).
-						- No se sabe si se puede crear metadata asíncronamente y que el bot de Google la entienda.
 						- Se tiene que renderizar el componente antes de hacer una llamada asíncrona.
+						- No he encontrado información que diga que Google rastrea aún los enlaces que están dentro de estos componentes dinámicos (Ej. paginado).
+						- No se sabe si la metadata creada asíncronamente la entienda el bot de Google.
 					</script>
 				</section>
 				<section data-markdown>
@@ -138,7 +138,7 @@
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						#### Ventajas
+						#### Pros 👍
 
 						- Permite que los motores de búsqueda **rastreen correctamente** un sitio web.
 						- **Es más fácil de configurar** (*que SSR*) porque no necesitamos que la base de código sea compatible con la representación del lado del servidor.
@@ -147,9 +147,9 @@
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						#### Contras
+						#### Contras 👎
 
-						- Son servicios de paga 😅.
+						- Son servicios de paga 🤑😅.
 					</script>
 				</section>
 				<section>
@@ -162,12 +162,27 @@
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						#### Ventajas
+						#### Pros 👍
 						<p style="text-align: left;">Nuestra aplicación tendrá:</p>
 
 						- Una carga más rápida que los sitios web tradicionales
 						- **Mayor compatibilidad** para navegadores más antiguos y diferentes rastreadores.
 						- Una **experiencia de usuario más fluida**.
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						#### Contras 👎
+
+						- Ejerce presión sobre el servidor.
+						- Demora un poco más en el renderizado (*que CSR*) pero no es percibido por los usuarios (ms).
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						#### ⚠️ Advertencia
+
+						- Se debe de realizar SSR sólo a las vistas que lo necesiten.
 					</script>
 				</section>
 				<section>
